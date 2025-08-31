@@ -14,7 +14,6 @@ import io.github.RPG_game.ui.views.MapView;
 import io.github.RPG_game.ui.views.PlayerView;
 
 public class GameScreen implements Screen {
-
     private final OrthographicCamera camera;
     private final MapView mapView;
     private Entity player;
@@ -53,7 +52,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+        //delta correspond au temps écoulé depuis le dernier appel de render (en secondes)
         playerController.update(speed, delta);
 
         // Effacer l'écran
@@ -67,7 +66,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        playerView.render(batch, player); // dessine le joueur
+        playerView.render(batch, player, playerController, delta); // dessine le joueur
         batch.end();
     }
 
