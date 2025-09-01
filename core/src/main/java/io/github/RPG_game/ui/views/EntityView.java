@@ -47,11 +47,11 @@ public abstract class EntityView {
         currentDirection = model.getDirection();
         TextureRegion currentFrame;
         Animation<TextureRegion> anim = animations[currentDirection];//récupère la bonne ligne pour le déplacement
-        if(!model.isMoving()){
-            currentFrame = anim.getKeyFrame(0);
+        if(model.isMoving()){
+            currentFrame = anim.getKeyFrame(stateTime, true);
         }
         else{
-            currentFrame = anim.getKeyFrame(stateTime, true);
+            currentFrame = anim.getKeyFrame(0);
         }
         batch.draw(currentFrame, model.getPosition().x(), model.getPosition().y(), 48, 48);
     }
