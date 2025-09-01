@@ -9,6 +9,8 @@ import io.github.RPG_game.domain.entities.Entity;
 import io.github.RPG_game.domain.entities.Player;
 import io.github.RPG_game.domain.shared.Position;
 import io.github.RPG_game.ui.controllers.PlayerController;
+import io.github.RPG_game.ui.models.EntityModel;
+import io.github.RPG_game.ui.models.PlayerModel;
 import io.github.RPG_game.ui.views.EntityView;
 import io.github.RPG_game.ui.views.MapView;
 import io.github.RPG_game.ui.views.PlayerView;
@@ -16,6 +18,7 @@ import io.github.RPG_game.ui.views.PlayerView;
 public class GameScreen implements Screen {
     private final OrthographicCamera camera;
     private final MapView mapView;
+    private EntityModel  playerModel;
     private Entity player;
     private float playerX;
     private float playerY;
@@ -43,9 +46,10 @@ public class GameScreen implements Screen {
         // Position initiale du joueur
         playerX = worldWidth / 3f;
         playerY = worldHeight / 3f;
-        player = new Player(new Position(playerX, playerY));
+        this.player = new Player(new Position(playerX, playerY));
+        this.playerModel = new PlayerModel(player.getPosition());
         playerView = new PlayerView("player.png");
-        playerController = new PlayerController(player);
+        playerController = new PlayerController(playerModel);
         batch = new SpriteBatch();
 
     }
@@ -66,7 +70,7 @@ public class GameScreen implements Screen {
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        playerView.render(batch, player, playerController, delta); // dessine le joueur
+        playerView.render(batch, (PlayerModel)playerModel, delta); // dessine le joueur
         batch.end();
     }
 

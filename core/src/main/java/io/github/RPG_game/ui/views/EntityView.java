@@ -4,9 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
-import io.github.RPG_game.domain.entities.Entity;
-import io.github.RPG_game.ui.controllers.PlayerController;
+import io.github.RPG_game.ui.models.PlayerModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,22 +37,23 @@ public abstract class EntityView {
         currentDirection = 0;
     }
 
-    public void render(SpriteBatch batch, Entity entity, PlayerController playerController, float delta){
-        if(playerController.isMoving()){
+    // Problème uniquement du playerModel comment utiliser EntityModel ?
+    public void render(SpriteBatch batch, PlayerModel model, float delta){
+        if(model.isMoving()){
             stateTime += delta;
         } else {
             stateTime = 0f; // reset sur frame idle
         }
-        currentDirection = playerController.getDirection();
+        currentDirection = model.getDirection();
         TextureRegion currentFrame;
         Animation<TextureRegion> anim = animations[currentDirection];//récupère la bonne ligne pour le déplacement
-        if(!playerController.isMoving()){
+        if(!model.isMoving()){
             currentFrame = anim.getKeyFrame(0);
         }
         else{
             currentFrame = anim.getKeyFrame(stateTime, true);
         }
-        batch.draw(currentFrame, entity.getPosition().x(), entity.getPosition().y(), 48, 48);
+        batch.draw(currentFrame, model.getPosition().x(), model.getPosition().y(), 48, 48);
     }
 
     public void dispose(){

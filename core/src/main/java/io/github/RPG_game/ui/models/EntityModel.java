@@ -15,9 +15,9 @@ public abstract class EntityModel {
     }
 
     public void setPosition(Position position) {
-        this.position = position;
+        this.position = new Position(position.x(), position.y());
     }
-
+    public abstract void setDirection(int direction);
     public abstract int getDirection();
     public abstract boolean isMoving();
     public abstract void setMoving(boolean moving);
