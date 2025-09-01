@@ -64,13 +64,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Centrer la caméra sur le joueur
-        camera.position.set(player.getPosition().x(), player.getPosition().y(), 0);
+        camera.position.set(playerModel.getPosition().x(), playerModel.getPosition().y(), 0);
         camera.update();
         mapView.render(camera);
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        playerView.render(batch, (PlayerModel)playerModel, delta); // dessine le joueur
+        playerView.render(batch, playerModel, delta); // dessine le joueur
         batch.end();
     }
 

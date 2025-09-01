@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import io.github.RPG_game.ui.models.EntityModel;
 import io.github.RPG_game.ui.models.PlayerModel;
 
 import java.util.HashMap;
@@ -38,7 +39,7 @@ public abstract class EntityView {
     }
 
     // Problème uniquement du playerModel comment utiliser EntityModel ?
-    public void render(SpriteBatch batch, PlayerModel model, float delta){
+    public void render(SpriteBatch batch, EntityModel model, float delta){
         if(model.isMoving()){
             stateTime += delta;
         } else {
