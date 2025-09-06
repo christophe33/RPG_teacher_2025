@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.RPG_game.domain.entities.Entity;
 import io.github.RPG_game.domain.entities.Player;
 import io.github.RPG_game.domain.shared.Position;
+import io.github.RPG_game.facade.EntityFacade;
 import io.github.RPG_game.ui.controllers.PlayerController;
 import io.github.RPG_game.ui.models.EntityModel;
 import io.github.RPG_game.ui.models.PlayerModel;
@@ -20,13 +21,10 @@ public class GameScreen implements Screen {
     private final MapView mapView;
     private EntityModel  playerModel;
     private Entity player;
-    private float playerX;
-    private float playerY;
+    private EntityFacade playerFacade;
     private PlayerController playerController;
     private EntityView playerView;
     private SpriteBatch batch;
-    // Vitesse de déplacement du joueur/caméra
-    private final float speed = 200f;
 
     public GameScreen() {
         // Récupérer les dimensions de la map
@@ -44,18 +42,21 @@ public class GameScreen implements Screen {
         camera.setToOrtho(false, 900, 900);
 
         // Position initiale du joueur
-        playerX = worldWidth / 3f;
-        playerY = worldHeight / 3f;
+        float playerX = worldWidth / 3f;
+        float playerY = worldHeight / 3f;
         this.player = new Player(new Position(playerX, playerY));
-        this.playerModel = new PlayerModel(player.getPosition());
+        this.playerFacade = new EntityFacade(this.player);
+
+        this.playerModel = new PlayerModel(this.player);
         playerView = new PlayerView("player.png");
-        playerController = new PlayerController(playerModel);
+        playerController = new PlayerController(playerFacade, playerModel, this.player);
         batch = new SpriteBatch();
 
     }
 
     @Override
     public void render(float delta) {
+        float speed = 200f;
         //delta correspond au temps écoulé depuis le dernier appel de render (en secondes)
         playerController.update(speed, delta);
 

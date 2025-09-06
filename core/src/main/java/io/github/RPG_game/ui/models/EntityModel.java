@@ -1,24 +1,26 @@
 package io.github.RPG_game.ui.models;
 
+import io.github.RPG_game.domain.entities.Entity;
+import io.github.RPG_game.domain.entities.Player;
 import io.github.RPG_game.domain.shared.Position;
 
 public abstract class EntityModel {
 
-    private Position position;
+    private Entity entity;
 
-    public EntityModel(Position position){
-        this.position = new Position(position.x(), position.y());
+    public EntityModel(Entity entity){
+        this.entity = entity;
     }
-
-    public Position getPosition() {
-        return new Position(position.x(), position.y());
+    public void updateFromModel(Entity entity){
+        this.entity = entity;
     }
-
-    public void setPosition(Position position) {
-        this.position = new Position(position.x(), position.y());
+    public Position getPosition(){
+        return entity.getPosition();
     }
-    public abstract void setDirection(int direction);
-    public abstract int getDirection();
-    public abstract boolean isMoving();
-    public abstract void setMoving(boolean moving);
+    public int getDirection(){
+        return entity.getCurrentDirection();
+    }
+    public boolean isMoving(){
+        return entity.isMoving();
+    }
 }

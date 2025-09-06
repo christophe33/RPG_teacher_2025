@@ -3,47 +3,50 @@ package io.github.RPG_game.ui.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import io.github.RPG_game.domain.entities.Entity;
+import io.github.RPG_game.domain.entities.Player;
+import io.github.RPG_game.facade.EntityFacade;
 import io.github.RPG_game.domain.shared.Position;
 import io.github.RPG_game.ui.models.EntityModel;
 
 public class PlayerController {
 
+    private final EntityFacade playerFacade;
     private final EntityModel playerModel;
-    public PlayerController(EntityModel playerModel) {
+    private final Entity player;
+
+    public PlayerController(EntityFacade playerFacade, EntityModel playerModel, Entity player) {
+        this.playerFacade = playerFacade;
         this.playerModel = playerModel;
+        this.player = player;
     }
 
     public void update(float speed, float delta){
-        playerModel.setMoving(false);
-        float x = playerModel.getPosition().x();
-        float y = playerModel.getPosition().y();
+        playerFacade.setMoving(false);
+        float x = playerFacade.getPosition().x();
+        float y = playerFacade.getPosition().y();
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)){
             y += speed * delta;
-            playerModel.setDirection(2);
-            playerModel.setMoving(true);
+            playerFacade.setDirection(2);
+            playerFacade.setMoving(true);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.DOWN)){
             y -= speed * delta;
-            playerModel.setDirection(0);
-            playerModel.setMoving(true);
+            playerFacade.setDirection(0);
+            playerFacade.setMoving(true);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.LEFT)){
             x -= speed * delta;
-            playerModel.setDirection(1);
-            playerModel.setMoving(true);
+            playerFacade.setDirection(1);
+            playerFacade.setMoving(true);
         }
         if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
             x += speed * delta;
-            playerModel.setDirection(3);
-            playerModel.setMoving(true);
+            playerFacade.setDirection(3);
+            playerFacade.setMoving(true);
         }
-        playerModel.setPosition(new Position(x, y));
+        playerFacade.setPosition(new Position(x, y));
+        playerModel.updateFromModel(this.player);
     }
-    public int getDirection(){
-        return playerModel.getDirection();
-    }
-    public boolean isMoving() {
-        return playerModel.isMoving();
-    }
+
 }
