@@ -18,9 +18,9 @@ public abstract class EntityModel {
         return entity.getPosition();
     }
     public int getDirection(){
-        return entity.getCurrentDirection();
+        return 0;
     }
     public boolean isMoving(){
-        return entity.isMoving();
+        return false;
     }
 }
