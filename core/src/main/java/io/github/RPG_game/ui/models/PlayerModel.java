@@ -3,7 +3,7 @@ package io.github.RPG_game.ui.models;
 import io.github.RPG_game.domain.entities.Entity;
 
 public class PlayerModel extends EntityModel {
-    private Entity player;
+    private final Entity player;
     public PlayerModel(Entity entity){
         super(entity);
         this.player = entity;

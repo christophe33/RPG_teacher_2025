@@ -3,12 +3,12 @@ package io.github.RPG_game.facade;
 import io.github.RPG_game.domain.entities.Entity;
 import io.github.RPG_game.domain.shared.Position;
 
-public class EntityFacade {
+public class GameFacade {
     /**
      * We expose only attributes that are relevant to the view.
      */
-    private Entity entity;
-    public EntityFacade(Entity entity){
+    private final Entity entity;
+    public GameFacade(Entity entity){
         this.entity = entity;
     }
     public void setDirection(int direction){

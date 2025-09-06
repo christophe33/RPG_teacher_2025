@@ -3,18 +3,17 @@ package io.github.RPG_game.ui.controllers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import io.github.RPG_game.domain.entities.Entity;
-import io.github.RPG_game.domain.entities.Player;
-import io.github.RPG_game.facade.EntityFacade;
+import io.github.RPG_game.facade.GameFacade;
 import io.github.RPG_game.domain.shared.Position;
 import io.github.RPG_game.ui.models.EntityModel;
 
 public class PlayerController {
 
-    private final EntityFacade playerFacade;
+    private final GameFacade playerFacade;
     private final EntityModel playerModel;
     private final Entity player;
 
-    public PlayerController(EntityFacade playerFacade, EntityModel playerModel, Entity player) {
+    public PlayerController(GameFacade playerFacade, EntityModel playerModel, Entity player) {
         this.playerFacade = playerFacade;
         this.playerModel = playerModel;
         this.player = player;

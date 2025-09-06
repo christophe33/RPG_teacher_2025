@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import io.github.RPG_game.domain.entities.Entity;
 import io.github.RPG_game.domain.entities.Player;
 import io.github.RPG_game.domain.shared.Position;
-import io.github.RPG_game.facade.EntityFacade;
+import io.github.RPG_game.facade.GameFacade;
 import io.github.RPG_game.ui.controllers.PlayerController;
 import io.github.RPG_game.ui.models.EntityModel;
 import io.github.RPG_game.ui.models.PlayerModel;
@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
     private final MapView mapView;
     private EntityModel  playerModel;
     private Entity player;
-    private EntityFacade playerFacade;
+    private GameFacade playerFacade;
     private PlayerController playerController;
     private EntityView playerView;
     private SpriteBatch batch;
@@ -45,7 +45,7 @@ public class GameScreen implements Screen {
         float playerX = worldWidth / 3f;
         float playerY = worldHeight / 3f;
         this.player = new Player(new Position(playerX, playerY));
-        this.playerFacade = new EntityFacade(this.player);
+        this.playerFacade = new GameFacade(this.player);
 
         this.playerModel = new PlayerModel(this.player);
         playerView = new PlayerView("player.png");
