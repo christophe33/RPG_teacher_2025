@@ -22,8 +22,8 @@ public class PlayerController {
 
     public void update(float speed, float delta){
         playerFacade.setMoving(false);
-        float x = playerFacade.getPosition().x();
-        float y = playerFacade.getPosition().y();
+        float x = playerModel.getPosition().x();
+        float y = playerModel.getPosition().y();
 
         if(Gdx.input.isKeyPressed(Input.Keys.UP)){
             y += speed * delta;
